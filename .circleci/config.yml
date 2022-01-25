@@ -38,7 +38,6 @@ jobs:
             - node_modules
       - run: |
           echo "API_URL=${API_URL_DEV}" >> .env
-          echo "WIZARD_URL=${WIZARD_URL_DEV}" >> .env
       - run: yarn build
       - persist_to_workspace:
           root: ~/
@@ -73,7 +72,6 @@ jobs:
             - node_modules
       - run: |
           echo "API_URL=${API_URL_STG}" >> .env
-          echo "WIZARD_URL=${WIZARD_URL_STG}" >> .env
       - run: yarn build
       - persist_to_workspace:
           root: ~/
