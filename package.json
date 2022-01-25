@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "@cloudoki",
   "private": true,
+  "engines": {
+    "node": ">=16.13.2"
+  },
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.prod.babel.ts --progress",
     "prebuild": "yarn lint",
