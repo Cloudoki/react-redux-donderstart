@@ -1,0 +1,31 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", 
+      {
+        "corejs": 3,
+        "useBuiltIns": "usage",
+        "modules": "commonjs",
+        "forceAllTransforms": true,
+        "targets": { 
+          "node": "current",
+          "browsers": "last 2 versions, not dead"
+        }
+      }
+    ], 
+    "@babel/preset-react", 
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    [
+      "babel-plugin-styled-components",
+      {
+        "displayName": true,
+        "minify": false,
+        "transpileTemplateLiterals": false,
+        "pure": false
+      }
+    ]
+  ]
+}

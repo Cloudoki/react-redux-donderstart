@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1357px" height="141px" viewBox="0 0 1357 141" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Path-2</title>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#015FA1" offset="0%"></stop>
+            <stop stop-color="#3585C6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="4.-UI---Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Step-3---Question-3a" transform="translate(-9.000000, -627.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+            <g id="shape-home-mogi-1-copy-3" transform="translate(683.000000, 702.000000) scale(-1, 1) rotate(180.000000) translate(-683.000000, -702.000000) translate(0.000000, 627.000000)">
+                <path d="M8.17941597e-13,0 C26.9630578,33.3044071 135.68174,54.0604612 326.156047,62.268162 C611.867505,74.5797131 538.99284,114.031876 817.678989,140.856447 C1096.36515,167.681017 1366,129.410172 1366,104.043598 C1366,87.1325486 1366,52.4513494 1366,0 L8.17941597e-13,0 Z" id="Path-2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

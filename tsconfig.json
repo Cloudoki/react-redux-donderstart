@@ -1,0 +1,43 @@
+{
+	"compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2019",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "noImplicitThis": true,
+    "pretty": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+		"strict": true,
+		"isolatedModules": false,
+    "esModuleInterop": true,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"],
+    },
+    "plugins": [
+      {
+          "transform": "typescript-plugin-styled-components",
+          "type": "config",
+          "minify": true,
+          "ssr": true
+      }
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+}

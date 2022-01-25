@@ -1,0 +1,129 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: cimg/node:16.13.2
+
+jobs:
+  release:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: GH_TOKEN=$GH_TOKEN npx semantic-release@17
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  build-dev:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: |
+          echo "API_URL=${API_URL_DEV}" >> .env
+          echo "WIZARD_URL=${WIZARD_URL_DEV}" >> .env
+      - run: yarn build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  deploy-dev:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: |
+          echo $SERVICE_KEY_DEV > ${HOME}/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          gsutil ls gs://${ADMIN_APP_BUCKET_DEV}/*.js > .previous_js
+          gsutil -m cp -r dist/* gs://${ADMIN_APP_BUCKET_DEV}
+          gsutil setmeta -h "Cache-Control:no-store, no-cache, must-revalidate" gs://${ADMIN_APP_BUCKET_DEV}/index.html
+
+
+  build-stg:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: |
+          echo "API_URL=${API_URL_STG}" >> .env
+          echo "WIZARD_URL=${WIZARD_URL_STG}" >> .env
+      - run: yarn build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  deploy-stg:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: |
+          echo $SERVICE_KEY_STG > ${HOME}/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          gsutil ls gs://${ADMIN_APP_BUCKET_STG}/*.js > .previous_js
+          gsutil -m cp -r dist/* gs://${ADMIN_APP_BUCKET_STG}
+          gsutil setmeta -h "Cache-Control:no-store, no-cache, must-revalidate" gs://${ADMIN_APP_BUCKET_STG}/index.html
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - release:
+          context:
+            - github
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+      - build-dev:
+          filters:
+            branches:
+              only: develop
+      - deploy-dev:
+          filters:
+            branches:
+              only: develop
+          requires:
+            - build-dev
+      - build-stg:
+          filters:
+            branches:
+              only: staging
+          requires:
+            - release
+      - deploy-stg:
+          filters:
+            branches:
+              only: staging
+          requires:
+            - build-stg

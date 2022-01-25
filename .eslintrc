@@ -1,0 +1,56 @@
+{
+  "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "ecmaVersion": 2019,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "impliedStrict": true
+      }
+    },
+    "plugins": ["@typescript-eslint", "react", "react-hooks"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "quotes": ["error", "single"],
+      "semi": ["error", "never"],
+      "prefer-const": "error",
+      "no-var": "error",
+      "comma-dangle": ["error", "always-multiline"],
+      "space-before-blocks": ["error", "always"],
+      "space-before-function-paren": ["error", {"anonymous": "never", "named": "never", "asyncArrow": "always"}],
+      "space-in-parens": ["error", "never"],
+      "no-unneeded-ternary": "error",
+      "arrow-parens": ["error", "always"],
+      "arrow-spacing": "error",
+      "generator-star-spacing": ["error", {"before": false, "after": true}],
+      "no-console": ["warn"],
+      "max-len": ["error", { "code": 140, "ignoreStrings": true, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
+      "object-curly-newline": ["error", {
+        "ObjectPattern": { "multiline": true, "consistent": true },
+        "ImportDeclaration": { "multiline": true, "consistent": true },
+        "ExportDeclaration": { "multiline": true, "consistent": true }
+      }],
+      "no-underscore-dangle": "off",
+      "react/prop-types": "off",
+      "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+      "@typescript-eslint/member-delimiter-style": ["error", { "multiline": { "delimiter": "comma", "requireLast": true }}],
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/indent": ["error", 2],
+      "@typescript-eslint/ban-ts-comment": ["warn"]
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  }
