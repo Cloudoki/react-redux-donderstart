@@ -1,0 +1,63 @@
+{
+  "name": "react-redux-donderstart",
+  "version": "1.0.0",
+  "author": "@cloudoki",
+  "private": true,
+  "engines": {
+    "node": ">=16.13.2"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack.config.prod.babel.ts --progress",
+    "prebuild": "yarn lint",
+    "dev": "webpack serve --config webpack.config.dev.babel.ts",
+    "lint": "yarn lint:code && yarn tsc",
+    "lint:code": "eslint './src/**/*.{ts,tsx}' --fix"
+  },
+  "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-redux": "7.2.6",
+    "react-router-dom": "6.2.1",
+    "redux": "4.1.2",
+    "redux-saga": "1.1.3",
+    "styled-components": "5.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.12",
+    "@babel/plugin-transform-runtime": "7.16.10",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-react": "7.16.7",
+    "@babel/preset-typescript": "7.16.7",
+    "@babel/register": "7.16.9",
+    "@types/dotenv-webpack": "7.0.3",
+    "@types/history": "5.0.0",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@types/react-router-dom": "5.3.3",
+    "@types/redux-logger": "3.0.9",
+    "@types/styled-components": "5.1.21",
+    "@typescript-eslint/eslint-plugin": "5.10.0",
+    "@typescript-eslint/parser": "5.10.0",
+    "babel-eslint": "10.1.0",
+    "babel-loader": "8.2.3",
+    "babel-plugin-styled-components": "2.0.2",
+    "clean-webpack-plugin": "4.0.0",
+    "core-js": "3.20.3",
+    "dotenv-webpack": "7.0.3",
+    "eslint": "8.7.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "file-loader": "6.2.0",
+    "html-webpack-plugin": "5.5.0",
+    "redux-devtools-extension": "2.13.9",
+    "redux-logger": "3.0.6",
+    "semantic-release": "19.0.2",
+    "typescript": "4.5.5",
+    "typescript-plugin-styled-components": "2.0.0",
+    "webpack": "5.67.0",
+    "webpack-cli": "4.9.2",
+    "webpack-dev-server": "4.7.3",
+    "webpack-merge": "5.8.0"
+  }
+}
