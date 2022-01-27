@@ -24,5 +24,3 @@ Then you can simple run this command and follow the process
 ```bash
 $ donderstart
 ```
-
-![](console.webm)
