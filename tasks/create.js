@@ -5,8 +5,10 @@ import prompts from 'prompts'
 import fs from 'fs/promises'
 import path from 'path'
 import { exec } from 'child_process'
+import { fileURLToPath } from 'url'
 
 let projectName
+const rootPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../', 'packages') 
 
 async function checkDirExists (name) {
   try {
@@ -30,7 +32,7 @@ async function createDir (name) {
 
 async function copyMinimalContent () {
   try {
-    const minimalPath = path.resolve('./packages/minimal')
+    const minimalPath = path.resolve(`${rootPath}/minimal`)
     const destinationPath = path.resolve(projectName)
 
     const jsonFile = await fs.readFile(`${minimalPath}/package.json`)
@@ -45,7 +47,7 @@ async function copyMinimalContent () {
       process.exit(1)
     }
   } catch(err) {
-    console.log('Failed to copy content...')
+    console.log('Failed to copy content...', err)
     process.exit(1)
   }
 }
@@ -53,7 +55,7 @@ async function copyMinimalContent () {
 async function copyPluginsContent (plugins) {
   try {
     for (const plugin of plugins) {
-      const pluginPath = path.resolve(`./packages/${plugin}`)
+      const pluginPath = path.resolve(`${rootPath}/${plugin}`)
       const destinationPath = path.resolve(projectName)
 
       const jsonFile = await fs.readFile(`${destinationPath}/package.json`)
@@ -121,7 +123,7 @@ async function getPlugins () {
 async function init () {
   let name = ''
   let dirExists = true
-
+  
   while (dirExists) {
     name = await getName()
     dirExists = await checkDirExists(name)
@@ -139,9 +141,12 @@ async function init () {
   console.log(chalk.blue('Changing to project dir.'))
   console.log(chalk.bgGreen('Installing packages, please wait...'))
   
-  exec('yarn').stdout.pipe(process.stdout)
+  const install = exec('yarn')
+  install.stdout.pipe(process.stdout)
   
-  exec('yarn dev').stdout.pipe(process.stdout)
+  install.on('close', function() {
+    console.log('You can now run the app with', chalk.red('yarn dev'))
+  })
 }
 
 init()
