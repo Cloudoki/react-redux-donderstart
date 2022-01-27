@@ -5,13 +5,14 @@
   "main": "./tasks/create.js",
   "type": "module",
   "private": true,
+  "bin": {
+    "donderstart": "./tasks/create.js"
+  },
   "engines": {
     "node": ">=16.13.2"
   },
   "dependencies": {
     "chalk": "5.0.0",
-    "commander": "8.3.0",
     "prompts": "2.4.2"
-    
   }
 }
