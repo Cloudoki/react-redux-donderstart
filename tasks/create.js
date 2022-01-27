@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import chalk from 'chalk'
 import prompts from 'prompts'
 import fs from 'fs/promises'
@@ -136,7 +138,10 @@ async function init () {
 
   console.log(chalk.blue('Changing to project dir.'))
   console.log(chalk.bgGreen('Installing packages, please wait...'))
-  exec('npm install').stdout.pipe(process.stdout)
+  
+  exec('yarn').stdout.pipe(process.stdout)
+  
+  exec('yarn dev').stdout.pipe(process.stdout)
 }
 
 init()
